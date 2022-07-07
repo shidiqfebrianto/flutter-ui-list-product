@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_ui_list_product/products_module/controller/products_controller.dart';
-import 'package:flutter_ui_list_product/products_module/model/products_model.dart';
-import 'package:flutter_ui_list_product/utils/custom_color.dart';
 import 'package:get/get.dart';
+
+import '../../utils/custom_color.dart';
+import '../controller/products_controller.dart';
+import '../model/products_model.dart';
 
 class ProductsView extends GetResponsiveView {
   ProductsView({Key? key}) : super(key: key);
@@ -25,7 +26,8 @@ class ProductsView extends GetResponsiveView {
               );
             }
             return ListView.builder(
-              itemCount: productController.productsList.length,
+              controller: productController.scrollController,
+              itemCount: productController.offsetCount.value,
               itemBuilder: (context, index) {
                 final ProductsModel product =
                     productController.productsList[index];
@@ -73,57 +75,58 @@ class ProductsView extends GetResponsiveView {
                           ),
                         )),
                     Expanded(
-                        flex: 3,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(14, 10, 15, 10),
-                          child: Stack(
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    product.title ?? '',
-                                    style: TextStyle(
-                                      color: CustomColor.black,
-                                      fontFamily: 'Inter',
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  SizedBox(height: 10.h),
-                                  Flexible(
-                                    child: Text(
-                                      product.description ?? '',
-                                      style: TextStyle(
-                                        color: CustomColor.black,
-                                        fontFamily: 'Inter',
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                      maxLines: 4,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                child: Text(
-                                  '★ ${product.rating?.rate}',
+                      flex: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 10, 15, 10),
+                        child: Stack(
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  product.title ?? '',
                                   style: TextStyle(
                                     color: CustomColor.black,
                                     fontFamily: 'Inter',
                                     fontSize: 12.sp,
-                                    fontWeight: FontWeight.bold,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                SizedBox(height: 10.h),
+                                Flexible(
+                                  child: Text(
+                                    product.description ?? '',
+                                    style: TextStyle(
+                                      color: CustomColor.black,
+                                      fontFamily: 'Inter',
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    maxLines: 4,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
+                              ],
+                            ),
+                            Align(
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                '★ ${product.rating?.rate}',
+                                style: TextStyle(
+                                  color: CustomColor.black,
+                                  fontFamily: 'Inter',
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ],
-                          ),
-                        )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ]),
                 );
               },
