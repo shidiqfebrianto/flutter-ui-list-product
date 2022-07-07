@@ -46,7 +46,9 @@ class ProductsView extends GetResponsiveView {
                       )
                     ],
                   ),
-                  margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  margin: productController.isTablet.isTrue
+                      ? const EdgeInsets.fromLTRB(140, 19, 140, 19)
+                      : const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Row(children: [
                     Expanded(
                         flex: 2,
@@ -67,7 +69,9 @@ class ProductsView extends GetResponsiveView {
                                 style: TextStyle(
                                   color: CustomColor.black,
                                   fontFamily: 'Inter',
-                                  fontSize: 16.sp,
+                                  fontSize: productController.isTablet.isTrue
+                                      ? 24.sp
+                                      : 16.sp,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
@@ -89,7 +93,9 @@ class ProductsView extends GetResponsiveView {
                                   style: TextStyle(
                                     color: CustomColor.black,
                                     fontFamily: 'Inter',
-                                    fontSize: 12.sp,
+                                    fontSize: productController.isTablet.isTrue
+                                        ? 15.sp
+                                        : 12.sp,
                                     fontWeight: FontWeight.w700,
                                   ),
                                   maxLines: 2,
@@ -102,7 +108,10 @@ class ProductsView extends GetResponsiveView {
                                     style: TextStyle(
                                       color: CustomColor.black,
                                       fontFamily: 'Inter',
-                                      fontSize: 12.sp,
+                                      fontSize:
+                                          productController.isTablet.isTrue
+                                              ? 13.sp
+                                              : 12.sp,
                                       fontWeight: FontWeight.w400,
                                     ),
                                     maxLines: 4,
